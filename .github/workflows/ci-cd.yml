@@ -27,13 +27,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker images
+      - name: Build Node.js app Docker image
         run: |
-          docker-compose -f docker-compose.yml build
+          docker build -t mustafaj/todo-app:latest -f Dockerfile .
 
-      - name: Tag and Push Docker images
+      - name: Build MySQL Docker image
         run: |
-          docker tag node:18-alpine mustafaj/todo-app:latest
+          docker pull mysql:8.0
           docker tag mysql:8.0 mustafaj/todo-mysql:latest
+
+      - name: Push Docker images
+        run: |
           docker push mustafaj/todo-app:latest
           docker push mustafaj/todo-mysql:latest
