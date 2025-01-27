@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-web-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: recipe-web-app
+  template:
+    metadata:
+      labels:
+        app: recipe-web-app
+    spec:
+      containers:
+      - name: recipe-web-app
+        image: mustafaj/recipe-website:latest
+        ports:
+        - containerPort: 80

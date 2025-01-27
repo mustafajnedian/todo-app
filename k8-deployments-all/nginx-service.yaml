@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx-service
+  namespace: development
+spec:
+  selector:
+    app: mj-web-app
+  ports:
+    - protocol: TCP
+      port: 840
+      targetPort: 9090
+  type: LoadBalancer
